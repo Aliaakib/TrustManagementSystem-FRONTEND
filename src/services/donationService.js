@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api/donations";
+// Use environment variable for backend URL
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/donations`;
 
 export const getDonations = async (trustId) => {
   const res = await axios.get(BASE_URL, { params: { trustId } });

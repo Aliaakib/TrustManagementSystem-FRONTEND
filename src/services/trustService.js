@@ -1,7 +1,7 @@
-// src/services/trustService.js
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/trust";
+// Use environment variable instead of hardcoding localhost
+const API_URL = `${import.meta.env.VITE_API_URL}/api/trust`;
 
 // Create new trust
 export const createTrust = async (formData) => {
@@ -19,7 +19,7 @@ export const getTrustByUser = async (userId) => {
   return res.data;
 };
 
-// ✅ Update trust by trustId (NEW)
+// Update trust by trustId
 export const updateTrust = async (trustId, formData) => {
   const res = await axios.put(`${API_URL}/${trustId}`, formData, {
     headers: {

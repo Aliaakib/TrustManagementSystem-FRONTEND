@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/documents";
+// Use Vite environment variable
+const API_URL = `${import.meta.env.VITE_API_URL}/api/documents`;
 
 export const getDocuments = (trustId) =>
   axios.get(API_URL, { params: { trustId } });

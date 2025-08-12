@@ -1,11 +1,10 @@
-// src/services/authService.js
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/auth";
+// Get API base from environment variable
+const API_URL = import.meta.env.VITE_API_URL + "/api/auth";
 
 /**
  * Register a new user (admin, trustee, member)
- * @param {Object} userData - name, email, phone, address, password, role
  */
 export const registerUser = async (userData) => {
   const response = await axios.post(`${API_URL}/register`, userData);
@@ -13,21 +12,21 @@ export const registerUser = async (userData) => {
 };
 
 /**
- * Log in a user (returns token and user object)
- * @param {Object} credentials - { email, password }
+ * Log in a user
  */
 export const loginUser = async (credentials) => {
   const response = await axios.post(`${API_URL}/login`, credentials);
   return response.data;
 };
 
+/**
+ * Get user by ID
+ */
 export const getUserById = async (userId) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(`${API_URL}/user/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
   } catch (error) {

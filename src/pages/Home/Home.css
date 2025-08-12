@@ -1,0 +1,207 @@
+/* Reset & Global */
+.home-container {
+  font-family: "Segoe UI", sans-serif;
+  color: #222;
+  line-height: 1.6;
+  background: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 2rem;
+  background: #ffffff;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  padding: 1rem;
+  animation: fadeInLeft 1s ease-in-out;
+}
+
+.hero-image img {
+  width: 90%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 0%;
+  object-fit: contain;
+}
+
+.hero-content {
+  max-width: 600px;
+  animation: fadeInRight 1s ease-in-out;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn.primary {
+  background: #4f46e5;
+  color: white;
+}
+
+.btn.secondary {
+  background: white;
+  border: 2px solid #4f46e5;
+  color: #4f46e5;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.stats {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #555;
+  display: flex;
+  gap: 2rem;
+}
+
+/* Features Section */
+.features-section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card .icon {
+  font-size: 2rem;
+  color: #4f46e5;
+  margin-bottom: 1rem;
+}
+
+/* Customers Section */
+.customers-section {
+  padding: 4rem 2rem;
+  background: #f1f1f1;
+  text-align: center;
+}
+
+.customers-section h2 {
+  margin-bottom: 2rem;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  font-weight: bold;
+}
+
+/* Value Section */
+.value-section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.value-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s;
+}
+
+.value-card:hover {
+  transform: scale(1.05);
+}
+
+.value-card .icon {
+  font-size: 2rem;
+  color: #10b981;
+  margin-bottom: 1rem;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Image Width */
+@media screen and (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+  }
+
+  .hero-image img {
+    width: 90%;
+  }
+}

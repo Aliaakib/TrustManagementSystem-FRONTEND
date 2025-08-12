@@ -1,0 +1,89 @@
+/* src/pages/CreateTrust/CreateTrust.css */
+
+.trust-container {
+  min-height: 100vh;
+  background-color: #f5f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
+  padding: 20px;
+}
+
+.trust-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.trust-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.trust-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.trust-label {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.trust-input,
+.trust-textarea {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.trust-textarea {
+  resize: none;
+}
+
+.trust-grid {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.trust-grid .trust-input {
+  flex: 1 1 45%;
+}
+
+.trust-btn {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.trust-btn:hover {
+  background-color: #333;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .trust-grid {
+    flex-direction: column;
+  }
+
+  .trust-grid .trust-input {
+    flex: 1 1 100%;
+  }
+}

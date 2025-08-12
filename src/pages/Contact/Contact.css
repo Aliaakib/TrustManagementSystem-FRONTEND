@@ -1,0 +1,195 @@
+.contact1-container {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f5f7fb;
+  padding: 60px 10%;
+  color: #0b1c3d;
+}
+
+/* Header */
+.contact1-header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeIn 1s ease;
+}
+
+.contact1-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.contact1-subtitle {
+  font-size: 18px;
+  color: #555;
+}
+
+/* Contact Content */
+.contact1-content {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  animation: slideUp 1s ease;
+}
+
+/* Info */
+.contact1-info {
+  flex: 1;
+  min-width: 280px;
+}
+
+.contact1-info-card {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 3px;
+}
+
+.contact1-info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.contact1-icon {
+  font-size: 26px;
+  color: #002e83;
+  margin-bottom: 10px;
+}
+
+/* Form */
+.contact1-form {
+  flex: 1;
+  min-width: 180px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+.contact1-input,
+.contact1-textarea {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  background-color: #f9f9f9;
+  color: #333;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.contact1-input:focus,
+.contact1-textarea:focus {
+  border-color: #002e83;
+}
+
+.contact1-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact1-btn {
+  background-color: #0b1c3d;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact1-btn:hover {
+  background-color: #002e83;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .contact1-container {
+    padding: 50px 5%;
+  }
+
+  .contact1-title {
+    font-size: 30px;
+  }
+
+  .contact1-subtitle {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact1-content {
+    flex-direction: column;
+  }
+
+  .contact1-header {
+    margin-bottom: 40px;
+  }
+
+  .contact1-title {
+    font-size: 26px;
+  }
+
+  .contact1-subtitle {
+    font-size: 15px;
+  }
+
+  .contact1-btn {
+    width: 100%;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact1-container {
+    padding: 30px 15px;
+  }
+
+  .contact1-title {
+    font-size: 24px;
+  }
+
+  .contact1-subtitle {
+    font-size: 14px;
+  }
+
+  .contact1-input,
+  .contact1-textarea {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .contact1-btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}

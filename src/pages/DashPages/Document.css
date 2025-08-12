@@ -1,0 +1,242 @@
+.document-container {
+  display: flex;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.document-main {
+  flex-grow: 1;
+  padding: 40px 30px;
+}
+
+.document-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+  color: #002e83;
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.btn-primary,
+.btn-outline {
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: #002e83;
+  color: #fff;
+  border: none;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #002e83;
+  color: #0b1c3d;
+}
+
+.document-table-wrapper {
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.document-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.document-table th,
+.document-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 14px;
+}
+
+.document-table th {
+  background-color: #f4f6f8;
+  font-weight: 600;
+}
+
+.doc-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.view-btn {
+  color: #0b1c3d;
+  background-color: #f2f4f7;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.view-btn:hover {
+  background-color: #002e83;
+  color: white;
+}
+
+.btn-icon-delete {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn-icon-delete:hover {
+  color: #a71d2a;
+}
+
+/* Mobile Card View */
+.document-cards {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.document-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e4e4e4;
+}
+
+.document-card h4 {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #0b1c3d;
+  font-weight: 600;
+}
+
+.document-card p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card-actions .view-btn {
+  padding: 6px 12px;
+  background-color: #f4f6f8;
+  color: #0b1c3d;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.card-actions .view-btn:hover {
+  background-color: #e1e7ef;
+}
+
+.card-actions .btn-icon-delete {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.card-actions .btn-icon-delete:hover {
+  color: #a71d2a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .document-table-wrapper {
+    display: none;
+  }
+
+  .document-cards {
+    display: flex;
+  }
+
+  .document-main {
+    padding: 20px 16px;
+  }
+
+  .document-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .doc-actions {
+    gap: 20px;
+  }
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px;
+  max-width: 95%;
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  color: #002e83;
+}
+
+.modal-content label {
+  display: block;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.modal-content input {
+  width: 94%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  gap: 10px;
+}

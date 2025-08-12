@@ -1,0 +1,258 @@
+.home1-container {
+  font-family: "Segoe UI", sans-serif;
+  color: #0b1c3d;
+}
+
+/* Hero Section */
+.home1-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 10%;
+  background-color: #f5f7fb;
+}
+
+.home1-hero-content {
+  flex: 1;
+  min-width: 280px;
+  animation: slideInLeft 1s ease;
+}
+
+.home1-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.home1-title {
+  font-size: 38px;
+  font-weight: bold;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.home1-btn {
+  background-color: #0b1c3d;
+  color: #fff;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home1-btn:hover {
+  background-color: #002e83;
+}
+
+.home1-hero-image {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+  animation: slideInRight 1s ease;
+}
+
+.home1-hero-image img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* Features */
+.home1-features {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 60px 10%;
+  background-color: #fff;
+  flex-wrap: wrap;
+}
+
+.home1-feature-card {
+  flex: 1;
+  min-width: 250px;
+  background-color: #f0f4ff;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home1-feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.home1-feature-icon {
+  font-size: 28px;
+  color: #002e83;
+  margin-bottom: 10px;
+}
+
+.highlight {
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/* About */
+.home1-about {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 60px 10%;
+  background-color: #f5f7fb;
+  gap: 40px;
+}
+
+.home1-about-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.home1-about-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.home1-about-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.home1-section-label {
+  color: #ec3d3d;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+/* Services */
+.home1-services {
+  padding: 60px 10%;
+  text-align: center;
+  background-color: #fff;
+}
+
+.home1-section-title {
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+.home1-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.home1-service-card {
+  background-color: #f0f4ff;
+  padding: 25px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+}
+
+.home1-service-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.home1-service-icon {
+  font-size: 28px;
+  color: #002e83;
+  margin-bottom: 10px;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .home1-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .home1-hero,
+  .home1-about,
+  .home1-features,
+  .home1-services {
+    padding: 40px 20px;
+  }
+
+  .home1-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .home1-about {
+    flex-direction: column-reverse;
+  }
+
+  .home1-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home1-title {
+    font-size: 28px;
+  }
+
+  .home1-subtitle {
+    font-size: 16px;
+  }
+
+  .home1-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .home1-section-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home1-hero,
+  .home1-about,
+  .home1-features,
+  .home1-services {
+    padding: 30px 15px;
+  }
+
+  .home1-title {
+    font-size: 24px;
+  }
+
+  .home1-subtitle {
+    font-size: 15px;
+  }
+
+  .home1-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,126 @@
+.tms-story-bg {
+  background-color: #f9fafc;
+}
+
+.tms-story-container {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: "Segoe UI", sans-serif;
+  color: #002e83;
+  background-color: #f9fafc;
+  animation: fadeIn 1s ease-in;
+}
+
+.tms-story-section {
+  margin-bottom: 50px;
+  animation: slideUp 1s ease-in;
+}
+
+.tms-story-heading {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #002e83;
+}
+
+.tms-story-text {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: #333;
+  text-align: justify;
+  animation: fadeIn 1.2s ease-in;
+}
+
+/* === Developer Section (no card) === */
+.tms-developer-section {
+  background-color: transparent;
+  padding: 30px 0;
+  border-top: 2px solid #002e83;
+  border-bottom: 2px solid #002e83;
+  animation: fadeIn 1.3s ease-in;
+}
+
+.tms-developer-heading {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #002e83;
+}
+
+.tms-developer-profile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
+  animation: slideUp 1.4s ease-in;
+}
+
+.tms-developer-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #002e83;
+}
+
+.tms-developer-info {
+  flex: 1;
+}
+
+.tms-developer-name {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #002e83;
+}
+
+.tms-developer-role {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.tms-developer-bio {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
+  animation: fadeIn 1.5s ease-in;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .tms-developer-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .tms-developer-info {
+    align-items: center;
+  }
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

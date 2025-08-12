@@ -1,0 +1,126 @@
+.notify-container {
+  padding: 40px 50px;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fff;
+}
+
+.notify-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.notify-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.notify-tabs button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.notify-tabs button.active {
+  background-color: #000;
+  color: white;
+}
+
+.notify-count {
+  background-color: black;
+  color: white;
+}
+
+.notify-empty {
+  font-style: italic;
+  color: #888;
+}
+
+.notify-card {
+  border: 1px solid #e5e7eb;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  position: relative;
+  background-color: white;
+}
+
+.notify-card.read {
+  opacity: 0.7;
+}
+
+.notify-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.notify-icon {
+  font-size: 20px;
+}
+
+.notify-priority {
+  font-size: 12px;
+  margin-left: auto;
+  text-transform: capitalize;
+}
+
+.notify-priority.high {
+  color: red;
+  font-weight: bold;
+}
+
+.notify-priority.medium {
+  color: #e67e22;
+}
+
+.notify-message {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.notify-time {
+  font-size: 13px;
+  color: #666;
+}
+
+.notify-delete {
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .notify-container {
+    padding: 20px;
+  }
+}
+
+.notification-container {
+  display: flex;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.notification-main {
+  flex-grow: 1;
+  padding: 40px 50px;
+  margin-left: 0;
+}
+
+@media (max-width: 768px) {
+  .notification-main {
+    padding: 20px;
+  }
+}

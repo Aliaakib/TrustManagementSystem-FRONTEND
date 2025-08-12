@@ -1,0 +1,109 @@
+.roles1-container {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f5f7fb;
+  padding: 60px 10%;
+  color: #0b1c3d;
+}
+
+.roles1-header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeIn 1s ease;
+}
+
+.roles1-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.roles1-subtitle {
+  font-size: 18px;
+  color: #555;
+}
+
+.roles1-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  animation: slideUp 1s ease;
+}
+
+.roles1-card {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.roles1-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.roles1-icon {
+  font-size: 32px;
+  color: #002e83;
+  margin-bottom: 15px;
+}
+
+.roles1-card h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #0b1c3d;
+}
+
+.roles1-card ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  line-height: 1.8;
+  font-size: 15px;
+  color: #444;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .roles1-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .roles1-section {
+    grid-template-columns: 1fr;
+  }
+
+  .roles1-title {
+    font-size: 28px;
+  }
+
+  .roles1-subtitle {
+    font-size: 16px;
+  }
+}

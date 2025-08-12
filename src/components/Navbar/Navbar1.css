@@ -1,0 +1,104 @@
+.navbar1 {
+  width: 100%;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #0b1c3d;
+  color: white;
+}
+
+.navbar1-topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 30px;
+  background-color: #0b1c3d;
+  font-size: 14px;
+}
+
+.navbar1-top-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar1-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background-color: white;
+  color: #0b1c3d;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.navbar1-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0b1c3d;
+}
+
+.navbar1-links {
+  display: flex;
+  gap: 25px;
+}
+
+.navbar1-link {
+  text-decoration: none;
+  color: #0b1c3d;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar1-link:hover {
+  color: #002e83;
+}
+
+.navbar1-contact {
+  display: flex;
+  align-items: center;
+  background-color: #0b1c3d;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 25px;
+  font-size: 14px;
+}
+
+.navbar1-phone-icon {
+  margin-right: 8px;
+}
+
+.navbar1-toggle {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #0b1c3d;
+}
+
+@media (max-width: 992px) {
+  .navbar1-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    transform: translateY(-200%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .navbar1-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .navbar1-toggle {
+    display: block;
+  }
+}

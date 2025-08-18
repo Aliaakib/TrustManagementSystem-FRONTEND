@@ -94,6 +94,7 @@
 //     <div className="document-container">
 //       <Sidebar />
 //       <div className="document-main">
+//         {/* Header */}
 //         <div className="document-header">
 //           <h2>Documents</h2>
 //           <button className="btn-primary" onClick={() => setShowModal(true)}>
@@ -279,6 +280,7 @@ const Document = () => {
   const [showModal, setShowModal] = useState(false);
 
   const trustId = localStorage.getItem("trustId");
+  const API_URL = import.meta.env.VITE_API_URL; // ✅ use env variable
 
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -387,14 +389,14 @@ const Document = () => {
                     </td>
                     <td className="doc-actions">
                       <a
-                        href={`http://localhost:5000${doc.fileUrl}`}
+                        href={`${API_URL}${doc.fileUrl}`} // ✅ updated
                         download={doc.fileName}
                         className="view-btn"
                       >
                         ⬇ Download
                       </a>
                       <a
-                        href={`http://localhost:5000${doc.fileUrl}`}
+                        href={`${API_URL}${doc.fileUrl}`} // ✅ updated
                         target="_blank"
                         rel="noopener noreferrer"
                         className="view-btn"
@@ -444,14 +446,14 @@ const Document = () => {
                 </p>
                 <div className="card-actions">
                   <a
-                    href={`http://localhost:5000${doc.fileUrl}`}
+                    href={`${API_URL}${doc.fileUrl}`} // ✅ updated
                     download={doc.fileName}
                     className="view-btn"
                   >
                     ⬇ Download
                   </a>
                   <a
-                    href={`http://localhost:5000${doc.fileUrl}`}
+                    href={`${API_URL}${doc.fileUrl}`} // ✅ updated
                     target="_blank"
                     rel="noopener noreferrer"
                     className="view-btn"

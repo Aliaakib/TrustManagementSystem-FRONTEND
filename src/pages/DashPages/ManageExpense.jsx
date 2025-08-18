@@ -24,6 +24,7 @@
 //     source: "donation",
 //   });
 
+//   // Fetch expenses
 //   const fetchExpenses = async () => {
 //     try {
 //       const res = await axios.get("http://localhost:5000/api/expenses", {
@@ -35,6 +36,7 @@
 //     }
 //   };
 
+//   // Fetch dashboard stats
 //   const fetchDashboardStats = async () => {
 //     try {
 //       const res = await axios.get("http://localhost:5000/api/dashboard/stats", {
@@ -111,7 +113,6 @@
 //             icon: "success",
 //             background: "#fff",
 //             color: "#000",
-//             confirmButtonColor: "#3085d6",
 //           });
 //         } catch (err) {
 //           console.error("Failed to delete expense:", err);
@@ -121,7 +122,6 @@
 //             icon: "error",
 //             background: "#fff",
 //             color: "#000",
-//             confirmButtonColor: "#d33",
 //           });
 //         }
 //       }
@@ -144,13 +144,11 @@
 //       ? summary.totalDonations
 //       : summary.feesCollected;
 
-//   // ✅ Export CSV Handler
 //   const handleExportCSV = () => {
 //     if (!filteredExpenses.length) {
 //       alert("No expenses to export.");
 //       return;
 //     }
-
 //     const headers = ["Sr No", "Notes", "Date", "Amount (₹)", "Source"];
 //     const rows = filteredExpenses.map((exp, index) => [
 //       index + 1,
@@ -159,14 +157,12 @@
 //       `"₹${exp.amount}"`,
 //       `"${exp.source}"`,
 //     ]);
-
 //     const csvContent =
 //       "\uFEFF" + [headers, ...rows].map((row) => row.join(",")).join("\n");
 
 //     const blob = new Blob([csvContent], {
 //       type: "text/csv;charset=utf-8;",
 //     });
-
 //     const url = URL.createObjectURL(blob);
 //     const link = document.createElement("a");
 //     link.href = url;
@@ -215,50 +211,51 @@
 //           </div>
 //         </div>
 
-//         <table className="expense-table">
-//           <thead>
-//             <tr>
-//               <th>Sr No</th>
-//               <th>Notes</th>
-//               <th>Date</th>
-//               <th>Amount</th>
-//               <th>Source</th>
-//               <th>Action</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {filteredExpenses.length > 0 ? (
-//               filteredExpenses.map((exp, index) => (
-//                 <tr key={exp._id || exp.id}>
-//                   <td>{index + 1}</td>
-//                   <td>{exp.notes}</td>
-//                   <td>{new Date(exp.date).toLocaleDateString()}</td>
-//                   <td className="expense-amount-cell">₹{exp.amount}</td>
-//                   <td>{exp.source}</td>
-//                   <td>
-//                     <button
-//                       className="expense-delete-icon"
-//                       onClick={() => handleDeleteExpense(exp._id)}
-//                       title="Delete Expense"
-//                     >
-//                       <FaTrashAlt />
-//                     </button>
+//         {/* Table View */}
+//         <div className="table-wrapper">
+//           <table className="expense-table">
+//             <thead>
+//               <tr>
+//                 <th>Sr No</th>
+//                 <th>Notes</th>
+//                 <th>Date</th>
+//                 <th>Amount</th>
+//                 <th>Source</th>
+//                 <th>Action</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {filteredExpenses.length > 0 ? (
+//                 filteredExpenses.map((exp, index) => (
+//                   <tr key={exp._id || exp.id}>
+//                     <td>{index + 1}</td>
+//                     <td>{exp.notes}</td>
+//                     <td>{new Date(exp.date).toLocaleDateString()}</td>
+//                     <td className="expense-amount-cell">₹{exp.amount}</td>
+//                     <td>{exp.source}</td>
+//                     <td>
+//                       <button
+//                         className="expense-delete-icon"
+//                         onClick={() => handleDeleteExpense(exp._id)}
+//                         title="Delete Expense"
+//                       >
+//                         <FaTrashAlt />
+//                       </button>
+//                     </td>
+//                   </tr>
+//                 ))
+//               ) : (
+//                 <tr>
+//                   <td colSpan="6" className="no-data">
+//                     No expenses found.
 //                   </td>
 //                 </tr>
-//               ))
-//             ) : (
-//               <tr>
-//                 <td
-//                   colSpan="6"
-//                   style={{ textAlign: "center", padding: "20px" }}
-//                 >
-//                   No expenses found.
-//                 </td>
-//               </tr>
-//             )}
-//           </tbody>
-//         </table>
-//         {/* Card View for Mobile Devices */}
+//               )}
+//             </tbody>
+//           </table>
+//         </div>
+
+//         {/* Card View (Mobile) */}
 //         <div className="expense-card-container">
 //           {filteredExpenses.length > 0 ? (
 //             filteredExpenses.map((exp, index) => (
@@ -310,6 +307,7 @@
 //         </div>
 //       </div>
 
+//       {/* Modal */}
 //       {showModal && (
 //         <div className="modal-backdrop">
 //           <div className="modal-content">
@@ -387,6 +385,9 @@ import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
+// ✅ Use environment variable
+const API = import.meta.env.VITE_API_URL;
+
 const ManageExpense = () => {
   const [expenses, setExpenses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -408,7 +409,7 @@ const ManageExpense = () => {
   // Fetch expenses
   const fetchExpenses = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/expenses", {
+      const res = await axios.get(`${API}/api/expenses`, {
         params: { trustId, filter },
       });
       setExpenses(res.data.expenses);
@@ -420,7 +421,7 @@ const ManageExpense = () => {
   // Fetch dashboard stats
   const fetchDashboardStats = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/dashboard/stats", {
+      const res = await axios.get(`${API}/api/dashboard/stats`, {
         params: { trustId },
       });
       const { totalDonations = 0, feesCollected = 0 } = res.data;
@@ -461,10 +462,7 @@ const ManageExpense = () => {
         trustId,
       };
 
-      const res = await axios.post(
-        "http://localhost:5000/api/expenses",
-        newExpense
-      );
+      const res = await axios.post(`${API}/api/expenses`, newExpense);
       setExpenses((prev) => [...prev, res.data]);
       handleModalToggle();
     } catch (error) {
@@ -486,7 +484,7 @@ const ManageExpense = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/api/expenses/${id}`);
+          await axios.delete(`${API}/api/expenses/${id}`);
           fetchExpenses();
           Swal.fire({
             title: "Deleted!",

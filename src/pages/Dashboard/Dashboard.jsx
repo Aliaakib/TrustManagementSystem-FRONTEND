@@ -18,11 +18,11 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 
 const COLORS = ["#002E83", "#c8d2dcbd"];
 
+// ✅ use env variable instead of hardcoding
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
-
-  // ✅ use API URL from .env
-  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const trustId = localStorage.getItem("trustId");
@@ -33,9 +33,10 @@ const Dashboard = () => {
 
     const fetchStats = async () => {
       try {
-        const res = await axios.get(`${API_URL}/api/dashboard/stats`, {
-          params: { trustId },
-        });
+        const res = await axios.get(
+          `${API_URL}/api/dashboard/stats?trustId=${trustId}`,
+          { withCredentials: true } // ✅ include cookies if needed
+        );
         console.log("Dashboard stats:", res.data);
         setStats(res.data);
       } catch (err) {
@@ -44,7 +45,7 @@ const Dashboard = () => {
     };
 
     fetchStats();
-  }, [API_URL]);
+  }, []);
 
   if (!stats) return <div>Loading...</div>;
 

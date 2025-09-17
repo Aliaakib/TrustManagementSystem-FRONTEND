@@ -442,6 +442,259 @@
 
 // export default FeesPayment;
 
+//////////////////////////////
+
+// import React, { useEffect, useState } from "react";
+// import Sidebar from "../../components/Sidebar/Sidebar";
+// import "./FeesPayment.css";
+// import axios from "axios";
+// import {
+//   FaEnvelope,
+//   FaCheckCircle,
+//   FaRupeeSign,
+//   FaWhatsapp,
+// } from "react-icons/fa";
+// import jsPDF from "jspdf";
+// import autoTable from "jspdf-autotable";
+// import { getTrust } from "../../services/trustService";
+
+// const API_BASE = import.meta.env.VITE_API_URL; // ✅ use env variable
+
+// const FeesPayment = () => {
+//   const [members, setMembers] = useState([]);
+//   const [feeAmount, setFeeAmount] = useState(0);
+//   const [newFee, setNewFee] = useState("");
+//   const [showModal, setShowModal] = useState(false);
+//   const [selectedMember, setSelectedMember] = useState(null);
+//   const [selectedMonths, setSelectedMonths] = useState([]);
+//   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+
+//   const trustId = localStorage.getItem("trustId");
+
+//   useEffect(() => {
+//     const fetchFee = async () => {
+//       try {
+//         const res = await axios.get(`${API_BASE}/api/setfee`, {
+//           params: { trustId },
+//         });
+//         if (res.data.length > 0) {
+//           setFeeAmount(res.data[0].feeAmount);
+//         }
+//       } catch (err) {
+//         console.error("Error fetching fee:", err);
+//       }
+//     };
+
+//     const fetchMembers = async () => {
+//       try {
+//         const res = await axios.get(`${API_BASE}/api/members`, {
+//           params: { trustId },
+//         });
+//         setMembers(res.data);
+//       } catch (err) {
+//         console.error("Error fetching members:", err);
+//       }
+//     };
+
+//     fetchFee();
+//     fetchMembers();
+//   }, [trustId]);
+
+//   const handleSetFee = async () => {
+//     try {
+//       await axios.post(`${API_BASE}/api/setfee`, {
+//         trustId,
+//         feeAmount: newFee,
+//       });
+//       setFeeAmount(newFee);
+//       setNewFee("");
+//       alert("Fee set successfully!");
+//     } catch (err) {
+//       console.error("Error setting fee:", err);
+//     }
+//   };
+
+//   const handleMarkAsPaid = async () => {
+//     try {
+//       await axios.put(`${API_BASE}/api/members/${selectedMember._id}`, {
+//         feesPaid: true,
+//         monthsPaid: selectedMonths,
+//         yearPaid: selectedYear,
+//       });
+
+//       const updatedMembers = members.map((m) =>
+//         m._id === selectedMember._id
+//           ? {
+//               ...m,
+//               feesPaid: true,
+//               monthsPaid: selectedMonths,
+//               yearPaid: selectedYear,
+//             }
+//           : m
+//       );
+//       setMembers(updatedMembers);
+//       setShowModal(false);
+//       alert("Fee marked as paid!");
+//     } catch (err) {
+//       console.error("Error marking as paid:", err);
+//     }
+//   };
+
+//   const handleSelectMonth = (month) => {
+//     setSelectedMonths((prev) =>
+//       prev.includes(month) ? prev.filter((m) => m !== month) : [...prev, month]
+//     );
+//   };
+
+//   const generatePDF = async () => {
+//     const trust = await getTrust();
+//     const doc = new jsPDF();
+//     doc.text(`Fee Payment Report - ${trust.name}`, 20, 10);
+//     autoTable(doc, {
+//       head: [
+//         ["Name", "Email", "Phone", "Fees Paid", "Months Paid", "Year Paid"],
+//       ],
+//       body: members.map((m) => [
+//         m.name,
+//         m.email,
+//         m.phone,
+//         m.feesPaid ? "Yes" : "No",
+//         m.monthsPaid ? m.monthsPaid.join(", ") : "-",
+//         m.yearPaid || "-",
+//       ]),
+//     });
+//     doc.save("fees_report.pdf");
+//   };
+
+//   return (
+//     <div className="fees-container">
+//       <Sidebar />
+//       <div className="fees-content">
+//         <h2>Fees Payment</h2>
+
+//         {/* Set Fee Section */}
+//         <div className="set-fee-section">
+//           <h3>
+//             Current Fee: <FaRupeeSign /> {feeAmount}
+//           </h3>
+//           <input
+//             type="number"
+//             placeholder="Enter new fee amount"
+//             value={newFee}
+//             onChange={(e) => setNewFee(e.target.value)}
+//           />
+//           <button onClick={handleSetFee}>Set Fee</button>
+//         </div>
+
+//         {/* Members Table */}
+//         <table className="fees-table">
+//           <thead>
+//             <tr>
+//               <th>Name</th>
+//               <th>Email</th>
+//               <th>Phone</th>
+//               <th>Fees Paid</th>
+//               <th>Months Paid</th>
+//               <th>Year Paid</th>
+//               <th>Actions</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {members.map((m) => (
+//               <tr key={m._id}>
+//                 <td>{m.name}</td>
+//                 <td>{m.email}</td>
+//                 <td>{m.phone}</td>
+//                 <td>{m.feesPaid ? "Yes" : "No"}</td>
+//                 <td>{m.monthsPaid ? m.monthsPaid.join(", ") : "-"}</td>
+//                 <td>{m.yearPaid || "-"}</td>
+//                 <td>
+//                   {!m.feesPaid && (
+//                     <button
+//                       onClick={() => {
+//                         setSelectedMember(m);
+//                         setShowModal(true);
+//                       }}
+//                     >
+//                       <FaCheckCircle /> Mark as Paid
+//                     </button>
+//                   )}
+//                   <a
+//                     href={`mailto:${m.email}`}
+//                     target="_blank"
+//                     rel="noreferrer"
+//                   >
+//                     <FaEnvelope />
+//                   </a>
+//                   <a
+//                     href={`https://wa.me/${m.phone}`}
+//                     target="_blank"
+//                     rel="noreferrer"
+//                   >
+//                     <FaWhatsapp />
+//                   </a>
+//                 </td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+
+//         <button className="pdf-btn" onClick={generatePDF}>
+//           Download PDF Report
+//         </button>
+
+//         {/* Modal */}
+//         {showModal && (
+//           <div className="modal">
+//             <div className="modal-content">
+//               <h3>Mark Fee as Paid</h3>
+//               <p>Member: {selectedMember?.name}</p>
+//               <p>Select Months:</p>
+//               <div className="months-list">
+//                 {[
+//                   "January",
+//                   "February",
+//                   "March",
+//                   "April",
+//                   "May",
+//                   "June",
+//                   "July",
+//                   "August",
+//                   "September",
+//                   "October",
+//                   "November",
+//                   "December",
+//                 ].map((month) => (
+//                   <label key={month}>
+//                     <input
+//                       type="checkbox"
+//                       checked={selectedMonths.includes(month)}
+//                       onChange={() => handleSelectMonth(month)}
+//                     />
+//                     {month}
+//                   </label>
+//                 ))}
+//               </div>
+//               <p>
+//                 Year:{" "}
+//                 <input
+//                   type="number"
+//                   value={selectedYear}
+//                   onChange={(e) => setSelectedYear(e.target.value)}
+//                 />
+//               </p>
+//               <button onClick={handleMarkAsPaid}>Confirm</button>
+//               <button onClick={() => setShowModal(false)}>Cancel</button>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default FeesPayment;
+
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./FeesPayment.css";
@@ -545,23 +798,27 @@ const FeesPayment = () => {
   };
 
   const generatePDF = async () => {
-    const trust = await getTrust();
-    const doc = new jsPDF();
-    doc.text(`Fee Payment Report - ${trust.name}`, 20, 10);
-    autoTable(doc, {
-      head: [
-        ["Name", "Email", "Phone", "Fees Paid", "Months Paid", "Year Paid"],
-      ],
-      body: members.map((m) => [
-        m.name,
-        m.email,
-        m.phone,
-        m.feesPaid ? "Yes" : "No",
-        m.monthsPaid ? m.monthsPaid.join(", ") : "-",
-        m.yearPaid || "-",
-      ]),
-    });
-    doc.save("fees_report.pdf");
+    try {
+      const trust = await getTrust(trustId); // ✅ pass trustId
+      const doc = new jsPDF();
+      doc.text(`Fee Payment Report - ${trust.name}`, 20, 10);
+      autoTable(doc, {
+        head: [
+          ["Name", "Email", "Phone", "Fees Paid", "Months Paid", "Year Paid"],
+        ],
+        body: members.map((m) => [
+          m.name,
+          m.email,
+          m.phone,
+          m.feesPaid ? "Yes" : "No",
+          m.monthsPaid ? m.monthsPaid.join(", ") : "-",
+          m.yearPaid || "-",
+        ]),
+      });
+      doc.save("fees_report.pdf");
+    } catch (err) {
+      console.error("Error generating PDF:", err);
+    }
   };
 
   return (

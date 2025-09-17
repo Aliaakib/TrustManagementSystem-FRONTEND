@@ -19,6 +19,12 @@ export const getTrustByUser = async (userId) => {
   return res.data;
 };
 
+// Get trust by trustId (✅ newly added)
+export const getTrust = async (trustId) => {
+  const res = await axios.get(`${API_URL}/${trustId}`);
+  return res.data;
+};
+
 // Update trust by trustId
 export const updateTrust = async (trustId, formData) => {
   const res = await axios.put(`${API_URL}/${trustId}`, formData, {

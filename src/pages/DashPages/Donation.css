@@ -326,3 +326,12 @@
 .donation-mode-summary p {
   margin: 5px 0;
 }
+
+
+/* Centers loader in main content area only */
+.page-loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}

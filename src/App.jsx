@@ -60,3 +60,68 @@ function App() {
 }
 
 export default App;
+
+
+// import React from "react";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// import Home1 from "./pages/Home/Home1";
+// import Features from "./pages/Features/Features";
+// import Roles from "./pages/Roles/Roles";
+// import About from "./pages/About/About";
+// import Contact from "./pages/Contact/Contact";
+// import Register from "./pages/Auth/Register";
+// import Login from "./pages/Auth/Login";
+// import ForgetPassword from "./pages/Auth/ForgetPassword";
+// import CreateTrust from "./pages/CreateTrust/CreateTrust";
+// import OurStory from "./pages/OurStory";
+
+// import Dashboard from "./pages/Dashboard/Dashboard";
+// import Member from "./pages/DashPages/Member";
+// import Trustee from "./pages/DashPages/Trustee";
+// import Donation from "./pages/DashPages/Donation";
+// import FeesPayment from "./pages/DashPages/FeesPayment";
+// import ManageExpense from "./pages/DashPages/ManageExpense";
+// import TrustDetails from "./pages/DashPages/TrustDetails";
+// import Document from "./pages/DashPages/Document";
+// import Notification from "./pages/DashPages/Notification";
+// import Setting from "./pages/DashPages/Setting";
+
+// import PublicLayout from "./components/Layout/PublicLayout";
+
+// function App() {
+//   return (
+//     <Router>
+//       <Routes>
+//         {/* All routes are now public and use PublicLayout */}
+//         <Route element={<PublicLayout />}>
+//           {/* General public pages */}
+//           <Route path="/" element={<Home1 />} />
+//           <Route path="/features" element={<Features />} />
+//           <Route path="/roles" element={<Roles />} />
+//           <Route path="/about" element={<About />} />
+//           <Route path="/contact" element={<Contact />} />
+//           <Route path="/register" element={<Register />} />
+//           <Route path="/login" element={<Login />} />
+//           <Route path="/our-story" element={<OurStory />} />
+//           <Route path="/create-trust" element={<CreateTrust />} />
+//           <Route path="/forgot-password" element={<ForgetPassword />} />
+
+//           {/* Former private routes — now public */}
+//           <Route path="/dashboard" element={<Dashboard />} />
+//           <Route path="/members" element={<Member />} />
+//           <Route path="/trustees" element={<Trustee />} />
+//           <Route path="/donations" element={<Donation />} />
+//           <Route path="/fees" element={<FeesPayment />} />
+//           <Route path="/expenses" element={<ManageExpense />} />
+//           <Route path="/trust-details" element={<TrustDetails />} />
+//           <Route path="/documents" element={<Document />} />
+//           <Route path="/notifications" element={<Notification />} />
+//           <Route path="/settings" element={<Setting />} />
+//         </Route>
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;

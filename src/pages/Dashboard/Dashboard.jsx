@@ -123,10 +123,157 @@
 // export default Dashboard;
 
 // src/pages/Dashboard/Dashboard.jsx
+
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import "./Dashboard.css";
+// import { FaUsers, FaUserTie, FaDonate, FaMoneyBillWave } from "react-icons/fa";
+// import {
+//   BarChart,
+//   Bar,
+//   XAxis,
+//   YAxis,
+//   PieChart,
+//   Pie,
+//   Cell,
+//   Tooltip,
+//   ResponsiveContainer,
+// } from "recharts";
+// import Sidebar from "../../components/Sidebar/Sidebar";
+
+// const COLORS = ["#002E83", "#c8d2dcbd"];
+
+// // ✅ Always use env variable (set in .env: VITE_API_URL=https://your-backend.onrender.com)
+// const API_URL = import.meta.env.VITE_API_URL;
+
+// const Dashboard = () => {
+//   const [stats, setStats] = useState(null);
+//   const [error, setError] = useState("");
+
+//   useEffect(() => {
+//     const trustId = localStorage.getItem("trustId");
+//     const token = localStorage.getItem("token");
+
+//     if (!trustId) {
+//       console.warn("⚠️ trustId missing; cannot fetch dashboard stats");
+//       return;
+//     }
+
+//     if (!token) {
+//       console.warn("⚠️ No auth token found; user must log in");
+//       setError("Unauthorized. Please log in again.");
+//       return;
+//     }
+
+//     const fetchStats = async () => {
+//       try {
+//         const res = await axios.get(
+//           `${API_URL}/api/dashboard/stats?trustId=${trustId}`,
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`, // ✅ send JWT token
+//             },
+//             withCredentials: true,
+//           }
+//         );
+
+//         console.log("✅ Dashboard stats:", res.data);
+//         setStats(res.data);
+//       } catch (err) {
+//         console.error("❌ Error fetching stats:", err);
+//         setError(err.response?.data?.message || "Failed to load stats");
+//       }
+//     };
+
+//     fetchStats();
+//   }, []);
+
+//   if (error) return <div className="error-message">{error}</div>;
+//   if (!stats) return <div>Loading...</div>;
+
+//   return (
+//     <div className="dashboard-wrapper">
+//       <Sidebar />
+//       <div className="dashboard-container">
+//         <h2 className="dashboard-title">Trust Dashboard</h2>
+
+//         {/* Summary Cards */}
+//         <div className="dashboard-cards">
+//           <div className="dashboard-card">
+//             <FaUsers className="dashboard-icon" />
+//             <h3>{stats.totalMembers}</h3>
+//             <p>Total Members</p>
+//           </div>
+//           <div className="dashboard-card">
+//             <FaUserTie className="dashboard-icon" />
+//             <h3>{stats.totalTrustees}</h3>
+//             <p>Total Trustees</p>
+//           </div>
+//           <div className="dashboard-card">
+//             <FaDonate className="dashboard-icon" />
+//             <h3>₹{stats.totalDonations}</h3>
+//             <p>Donations Received</p>
+//           </div>
+//           <div className="dashboard-card">
+//             <FaMoneyBillWave className="dashboard-icon" />
+//             <h3>₹{stats.feesCollected}</h3>
+//             <p>Fees Collected</p>
+//           </div>
+//         </div>
+
+//         {/* Charts */}
+//         <div className="dashboard-charts">
+//           <div className="dashboard-chart-card">
+//             <h4>Monthly Donation Overview</h4>
+//             <ResponsiveContainer width="100%" height={250}>
+//               <BarChart data={stats.donationData}>
+//                 <XAxis dataKey="name" />
+//                 <YAxis />
+//                 <Tooltip />
+//                 <Bar dataKey="amount" fill="#002e83" radius={[5, 5, 0, 0]} />
+//               </BarChart>
+//             </ResponsiveContainer>
+//           </div>
+
+//           <div className="dashboard-chart-card">
+//             <h4>Fee Payment Status</h4>
+//             <ResponsiveContainer width="100%" height={250}>
+//               <PieChart>
+//                 <Pie
+//                   data={stats.feeStatusData}
+//                   dataKey="value"
+//                   nameKey="name"
+//                   cx="50%"
+//                   cy="50%"
+//                   outerRadius={80}
+//                   label
+//                 >
+//                   {stats.feeStatusData.map((entry, index) => (
+//                     <Cell key={index} fill={COLORS[index]} />
+//                   ))}
+//                 </Pie>
+//                 <Tooltip />
+//               </PieChart>
+//             </ResponsiveContainer>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Dashboard;
+
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Dashboard.css";
-import { FaUsers, FaUserTie, FaDonate, FaMoneyBillWave } from "react-icons/fa";
+import {
+  FaUsers,
+  FaUserTie,
+  FaDonate,
+  FaMoneyBillWave,
+} from "react-icons/fa";
 import {
   BarChart,
   Bar,
@@ -139,6 +286,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import Loader from "../../components/Loader/Loader"; // ✅ Import Loader
 
 const COLORS = ["#002E83", "#c8d2dcbd"];
 
@@ -148,6 +296,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true); // ✅ Add loader state
 
   useEffect(() => {
     const trustId = localStorage.getItem("trustId");
@@ -165,6 +314,7 @@ const Dashboard = () => {
     }
 
     const fetchStats = async () => {
+      setIsLoading(true);
       try {
         const res = await axios.get(
           `${API_URL}/api/dashboard/stats?trustId=${trustId}`,
@@ -181,82 +331,97 @@ const Dashboard = () => {
       } catch (err) {
         console.error("❌ Error fetching stats:", err);
         setError(err.response?.data?.message || "Failed to load stats");
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchStats();
   }, []);
 
-  if (error) return <div className="error-message">{error}</div>;
-  if (!stats) return <div>Loading...</div>;
+  if (error)
+    return (
+      <div className="dashboard-wrapper">
+        <Sidebar />
+        <div className="dashboard-container error-message">{error}</div>
+      </div>
+    );
 
   return (
     <div className="dashboard-wrapper">
       <Sidebar />
-      <div className="dashboard-container">
-        <h2 className="dashboard-title">Trust Dashboard</h2>
 
-        {/* Summary Cards */}
-        <div className="dashboard-cards">
-          <div className="dashboard-card">
-            <FaUsers className="dashboard-icon" />
-            <h3>{stats.totalMembers}</h3>
-            <p>Total Members</p>
+      {/* ✅ Blur background and show loader while loading */}
+      {isLoading ? (
+        <div className="dashboard-loading-overlay">
+          <Loader />
+        </div>
+      ) : (
+        <div className="dashboard-container">
+          <h2 className="dashboard-title">Trust Dashboard</h2>
+
+          {/* Summary Cards */}
+          <div className="dashboard-cards">
+            <div className="dashboard-card">
+              <FaUsers className="dashboard-icon" />
+              <h3>{stats.totalMembers}</h3>
+              <p>Total Members</p>
+            </div>
+            <div className="dashboard-card">
+              <FaUserTie className="dashboard-icon" />
+              <h3>{stats.totalTrustees}</h3>
+              <p>Total Trustees</p>
+            </div>
+            <div className="dashboard-card">
+              <FaDonate className="dashboard-icon" />
+              <h3>₹{stats.totalDonations}</h3>
+              <p>Donations Received</p>
+            </div>
+            <div className="dashboard-card">
+              <FaMoneyBillWave className="dashboard-icon" />
+              <h3>₹{stats.feesCollected}</h3>
+              <p>Fees Collected</p>
+            </div>
           </div>
-          <div className="dashboard-card">
-            <FaUserTie className="dashboard-icon" />
-            <h3>{stats.totalTrustees}</h3>
-            <p>Total Trustees</p>
-          </div>
-          <div className="dashboard-card">
-            <FaDonate className="dashboard-icon" />
-            <h3>₹{stats.totalDonations}</h3>
-            <p>Donations Received</p>
-          </div>
-          <div className="dashboard-card">
-            <FaMoneyBillWave className="dashboard-icon" />
-            <h3>₹{stats.feesCollected}</h3>
-            <p>Fees Collected</p>
+
+          {/* Charts */}
+          <div className="dashboard-charts">
+            <div className="dashboard-chart-card">
+              <h4>Monthly Donation Overview</h4>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={stats.donationData}>
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="amount" fill="#002e83" radius={[5, 5, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="dashboard-chart-card">
+              <h4>Fee Payment Status</h4>
+              <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                  <Pie
+                    data={stats.feeStatusData}
+                    dataKey="value"
+                    nameKey="name"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={80}
+                    label
+                  >
+                    {stats.feeStatusData.map((entry, index) => (
+                      <Cell key={index} fill={COLORS[index]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
-
-        {/* Charts */}
-        <div className="dashboard-charts">
-          <div className="dashboard-chart-card">
-            <h4>Monthly Donation Overview</h4>
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={stats.donationData}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="amount" fill="#002e83" radius={[5, 5, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className="dashboard-chart-card">
-            <h4>Fee Payment Status</h4>
-            <ResponsiveContainer width="100%" height={250}>
-              <PieChart>
-                <Pie
-                  data={stats.feeStatusData}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  label
-                >
-                  {stats.feeStatusData.map((entry, index) => (
-                    <Cell key={index} fill={COLORS[index]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

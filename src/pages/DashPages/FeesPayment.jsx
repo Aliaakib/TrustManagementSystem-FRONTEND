@@ -13,6 +13,7 @@ import autoTable from "jspdf-autotable";
 import { getTrustByUser } from "../../services/trustService";
 
 const FeesPayment = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [members, setMembers] = useState([]);
   const [search, setSearch] = useState("");
   const [showFeeModal, setShowFeeModal] = useState(false);
@@ -49,7 +50,7 @@ const FeesPayment = () => {
 
   const fetchFeeAmount = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/setfee", {
+      const res = await axios.get(`${API_URL}/api/setfee`, {
         params: { trustId },
       });
       if (res.data && res.data.feeAmount) {
@@ -62,7 +63,7 @@ const FeesPayment = () => {
 
   const fetchMembers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/members", {
+      const res = await axios.get(`${API_URL}/api/members`, {
         params: { trustId },
       });
       const unpaid = res.data.filter((m) => !m.feesPaid);
@@ -139,7 +140,7 @@ const FeesPayment = () => {
   const handleFeeSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/setfee", {
+      await axios.post(`${API_URL}/api/setfee`, {
         trustId,
         feeAmount: newFee,
       });
@@ -156,7 +157,7 @@ const FeesPayment = () => {
     }
     try {
       await axios.put(
-        `http://localhost:5000/api/members/${selectedMember._id}`,
+        `${API_URL}/api/members/${selectedMember._id}`,
         {
           feesPaid: true,
           monthsPaid: selectedMonths,

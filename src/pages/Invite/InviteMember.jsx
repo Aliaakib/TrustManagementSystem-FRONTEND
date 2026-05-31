@@ -13,7 +13,7 @@ const InviteMember = () => {
       try {
         // const res = await axios.get(`/api/invite/member/${trustId}`);
         const res = await axios.get(
-          `http://localhost:5000/api/invite/member/${trustId}`
+         `${import.meta.env.VITE_API_URL}/api/invite/member/${trustId}`
         );
 
         setTrust(res.data);

@@ -300,6 +300,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 const Trustee = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [showModal, setShowModal] = useState(false);
   const [trustees, setTrustees] = useState([]);
   const [filteredTrustees, setFilteredTrustees] = useState([]);
@@ -330,7 +331,7 @@ const Trustee = () => {
 
   const fetchTrustees = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/trustees", {
+      const res = await axios.get(`${API_URL}/api/trustees`, {
         params: { trustId },
       });
       setTrustees(res.data);
@@ -353,7 +354,7 @@ const Trustee = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/trustees", {
+      await axios.post(`${API_URL}/api/trustees`, {
         ...formData,
         trustId,
       });
@@ -378,7 +379,7 @@ const Trustee = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/api/trustees/${id}`);
+          await axios.delete(`${API_URL}/api/trustees/${id}`);
           fetchTrustees();
           Swal.fire("Deleted!", "Trustee has been removed.", "success");
         } catch (error) {

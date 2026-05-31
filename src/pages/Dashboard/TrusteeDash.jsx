@@ -30,7 +30,7 @@ const TrusteeDash = () => {
     const fetchStats = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/dashboard/stats?trustId=${trustId}`
+           `${import.meta.env.VITE_API_URL}/api/dashboard/stats?trustId=${trustId}`
         );
         console.log("Trustee Dashboard stats:", res.data);
         setStats(res.data);

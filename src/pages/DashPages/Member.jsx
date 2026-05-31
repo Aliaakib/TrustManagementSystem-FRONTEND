@@ -9,6 +9,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 const Member = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [showModal, setShowModal] = useState(false);
   const [members, setMembers] = useState([]);
   const [filteredMembers, setFilteredMembers] = useState([]);
@@ -27,7 +28,7 @@ const Member = () => {
   // Fetch members function (can be reused)
   const fetchMembers = async (id) => {
     try {
-      const res = await axios.get("http://localhost:5000/api/members", {
+      const res = await axios.get(`${API_URL}/api/members`, {
         params: { trustId: id },
       });
       const currentYear = new Date().getFullYear().toString();
@@ -103,7 +104,7 @@ const Member = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5000/api/members", {
+      await axios.post(`${API_URL}/api/members`, {
         ...formData,
         trustId,
       });
@@ -144,7 +145,7 @@ const Member = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/api/members/${id}`);
+          await axios.delete(`${API_URL}/api/members/${id}`);
           await fetchMembers(trustId);
           Swal.fire({
             title: "Deleted!",

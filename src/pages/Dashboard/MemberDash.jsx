@@ -30,7 +30,7 @@
 //     const fetchStats = async () => {
 //       try {
 //         const res = await axios.get(
-//           `http://localhost:5000/api/dashboard/stats?trustId=${trustId}`
+//           `http://import.meta.env.VITE_API_URL/api/dashboard/stats?trustId=${trustId}`
 //         );
 //         console.log("Member Dashboard stats:", res.data);
 //         setStats(res.data);
@@ -150,7 +150,8 @@ const MemberDash = () => {
     const fetchStats = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/dashboard/stats?trustId=${trustId}`
+          // `http://import.meta.env.VITE_API_URL/api/dashboard/stats?trustId=${trustId}`
+          `${import.meta.env.VITE_API_URL}/api/dashboard/stats?trustId=${trustId}`
         );
         setStats(res.data);
       } catch (err) {

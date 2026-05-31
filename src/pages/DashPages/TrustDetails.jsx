@@ -271,12 +271,13 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./TrustDetails.css";
 import { getTrustByUser, updateTrust } from "../../services/trustService";
-
+import Loader from "../../components/Loader/Loader";
 const TrustDetails = () => {
   const userId = localStorage.getItem("userId");
   const [trust, setTrust] = useState(null);
   const [formData, setFormData] = useState({});
   const [showModal, setShowModal] = useState(false);
+const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -286,16 +287,20 @@ const TrustDetails = () => {
     }
 
     const fetchTrust = async () => {
-      try {
-        console.log("Fetching trust for userId:", userId);
-        const response = await getTrustByUser(userId);
-        console.log("Trust fetched:", response);
-        setTrust(response);
-        // ...
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
-    };
+  try {
+    setLoading(true);
+
+    console.log("Fetching trust for userId:", userId);
+    const response = await getTrustByUser(userId);
+
+    console.log("Trust fetched:", response);
+    setTrust(response);
+  } catch (error) {
+    console.error("Fetch error:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
     fetchTrust();
   }, []);
@@ -339,8 +344,9 @@ const TrustDetails = () => {
     }
   };
 
-  if (!trust) return <div className="trust-details-loading">Loading...</div>;
-
+if (loading) {
+  return <Loader />;
+}
   return (
     <div className="trust-details-container">
       <Sidebar />

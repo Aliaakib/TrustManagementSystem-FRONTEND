@@ -660,7 +660,7 @@ const Donation = () => {
       <div className="donation-main">
         {isLoading ? (
           <div className="page-loader-wrapper">
-            {/* <Loader /> */}
+            <Loader />
           </div>
         ) : (
           <>

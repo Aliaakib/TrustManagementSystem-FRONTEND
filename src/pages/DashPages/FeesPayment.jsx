@@ -174,6 +174,9 @@ const FeesPayment = () => {
     m.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  const existingPaidMonths =
+  selectedMember?.feesPaidData?.[selectedYear] || [];
+
   return (
     <div className="fees-wrapper">
       <Sidebar />
@@ -233,17 +236,26 @@ const FeesPayment = () => {
                     </td>
                     <td>
                       <div className="fees-actions">
-                        <button
-                          className="mark-paid-btn"
-                          onClick={() => {
-                            setSelectedMember(member);
-                            setShowMarkPaidModal(true);
-                            setSelectedMonths([]);
-                            setSelectedYear(new Date().getFullYear());
-                          }}
-                        >
-                          <FaCheckCircle /> Mark Paid
-                        </button>
+                     {!member.feesPaid && (
+  <button
+    className="mark-paid-btn"
+    onClick={() => {
+  const currentYear = new Date().getFullYear().toString();
+
+  setSelectedMember(member);
+
+  setSelectedYear(currentYear);
+
+  setSelectedMonths(
+    member.feesPaidData?.[currentYear] || []
+  );
+
+  setShowMarkPaidModal(true);
+}}
+  >
+    <FaCheckCircle /> Mark Paid
+  </button>
+)}
                         <button
                           className="btn-outline"
                           onClick={() => handleSendMail(member)}
@@ -295,17 +307,26 @@ const FeesPayment = () => {
                   <span>₹{newFee}</span>
                 </div>
                 <div className="fees-card-actions">
-                  <button
-                    className="mark-paid-btn"
-                    onClick={() => {
-                      setSelectedMember(member);
-                      setSelectedMonths([]);
-                      setSelectedYear(new Date().getFullYear());
-                      setShowMarkPaidModal(true);
-                    }}
-                  >
-                    <FaCheckCircle /> Mark Paid
-                  </button>
+                {!member.feesPaid && (
+  <button
+    className="mark-paid-btn"
+    onClick={() => {
+  const currentYear = new Date().getFullYear().toString();
+
+  setSelectedMember(member);
+
+  setSelectedYear(currentYear);
+
+  setSelectedMonths(
+    member.feesPaidData?.[currentYear] || []
+  );
+
+  setShowMarkPaidModal(true);
+}}
+  >
+    <FaCheckCircle /> Mark Paid
+  </button>
+)}
                   <button
                     className="btn-outline"
                     onClick={() => handleSendMail(member)}
@@ -388,19 +409,21 @@ const FeesPayment = () => {
                       selectedMonths.includes(month) ? "selected" : ""
                     }`}
                   >
-                    <input
-                      type="checkbox"
-                      value={month}
-                      checked={selectedMonths.includes(month)}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        setSelectedMonths((prev) =>
-                          prev.includes(value)
-                            ? prev.filter((m) => m !== value)
-                            : [...prev, value]
-                        );
-                      }}
-                    />
+                   <input
+  type="checkbox"
+  value={month}
+  checked={selectedMonths.includes(month)}
+  disabled={existingPaidMonths.includes(month)}
+  onChange={(e) => {
+    const value = e.target.value;
+
+    setSelectedMonths((prev) =>
+      prev.includes(value)
+        ? prev.filter((m) => m !== value)
+        : [...prev, value]
+    );
+  }}
+/>
                     {month}
                   </label>
                 ))}
@@ -408,11 +431,19 @@ const FeesPayment = () => {
 
               <div className="year-dropdown">
                 <label htmlFor="year">Select Year:</label>
-                <select
-                  id="year"
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(e.target.value)}
-                >
+              <select
+  id="year"
+  value={selectedYear}
+  onChange={(e) => {
+    const year = e.target.value;
+
+    setSelectedYear(year);
+
+    setSelectedMonths(
+      selectedMember?.feesPaidData?.[year] || []
+    );
+  }}
+>
                   {[2025, 2026, 2027, 2028, 2029, 2030].map((year) => (
                     <option key={year} value={year}>
                       {year}

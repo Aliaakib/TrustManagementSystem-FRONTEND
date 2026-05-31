@@ -660,7 +660,7 @@ const Donation = () => {
       <div className="donation-main">
         {isLoading ? (
           <div className="page-loader-wrapper">
-            <Loader />
+            {/* <Loader /> */}
           </div>
         ) : (
           <>
@@ -750,6 +750,76 @@ const Donation = () => {
             </div>
           </>
         )}
+
+        {showModal && (
+  <div className="fees-modal-overlay">
+    <div className="fees-modal-content">
+      <h3>Add New Donation</h3>
+
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Donor Name *"
+          value={formData.name}
+          onChange={handleInputChange}
+          required
+        />
+
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number *"
+          value={formData.phone}
+          onChange={handleInputChange}
+          required
+        />
+
+        <select
+          name="mode"
+          value={formData.mode}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="cash">Cash</option>
+          <option value="online">Online</option>
+          <option value="cheque">Cheque</option>
+        </select>
+
+        <input
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={handleInputChange}
+          required
+        />
+
+        <input
+          type="number"
+          name="amount"
+          placeholder="Amount (₹) *"
+          value={formData.amount}
+          onChange={handleInputChange}
+          required
+        />
+
+        <div className="fees-modal-buttons">
+          <button
+            type="button"
+            className="btn-outline"
+            onClick={handleModalToggle}
+          >
+            Cancel
+          </button>
+
+          <button type="submit" className="btn-primary">
+            Add Donation
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
       </div>
     </div>
   );
